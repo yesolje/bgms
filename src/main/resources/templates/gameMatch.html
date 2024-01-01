@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/js/common.js"></script>
 
 </head>
-<body>
+<body class="body">
     <header>
         <button class="adminPage" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="gameMatch.viewPlayer()">플레이어 확인</button>
         <button class="adminPage" onclick= common.goPage("/attendance")>출석 체크</button>
@@ -48,75 +48,19 @@
             </div>
         </div>
     </div>
-
-
     <!--모달end-->
 
-    <div class="container_gameMatch">
-        <div class="container_court court1">
-            <div class="container_court_button">
-                <!--게임 매칭 되었을 경우 뜨는 버튼창-->
-                <!--<button class="btn btn-danger gameCancel" onclick="">다시매칭</button>
-                <button class="btn btn-primary gameDone" onclick="">게임완료</button>-->
-                <button class="btn btn-primary playMan" onclick="">남복</button>
-                <button class="btn btn-danger playWoman" onclick="">여복</button>
-                <button class="btn btn-warning playMix" onclick="">혼복</button>
-                <button class="btn btn-secondary playManual" onclick="">수동</button>
-            </div>
-            <div class="container_court_playground">
-                <!--게임 매칭 되었을 경우 뜨는 플레이어창-->
-                <!--
-                <table class="container_court_playGround_player">
-                    <tr>
-                        <td class="container_court_playGround_player_detail">
-                            <div class="player">
-                                <a>홍길동E1</a>
-                            </div>
-                        </td>
-                        <td class="container_court_playGround_player_detail">
-                            <div class="player">
-                                <a>홍길동A</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="container_court_playGround_player_detail">
-                            <div class="player">
-                                <a>홍길동B</a>
-                            </div>
-                        </td>
-                        <td class="container_court_playGround_player_detail">
-                            <div class="player">
-                                <a>홍길동E2</a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>-->
-                <img src="/images/court_6.png" class="game_court_image" alt="Badminton court image">
-            </div>
-        </div>
-        <div class="container_court court2">
-            <div class="container_court_button">
-                <button class="btn btn-primary playMan" onclick="">남복</button>
-                <button class="btn btn-danger playWoman" onclick="">여복</button>
-                <button class="btn btn-warning playMix" onclick="">혼복</button>
-                <button class="btn btn-secondary playManual" onclick="">수동</button>
-            </div>
-            <div class="container_court_playground">
-                <img src="/images/court_6.png" class="game_court_image" alt="Badminton court image">
-            </div>
-        </div>
-        <div class="container_court court3">
-            <div class="container_court_button">
-                <button class="btn btn-primary playMan" onclick="">남복</button>
-                <button class="btn btn-danger playWoman" onclick="">여복</button>
-                <button class="btn btn-warning playMix" onclick="">혼복</button>
-                <button class="btn btn-secondary playManual" onclick="">수동</button>
-            </div>
-            <div class="container_court_playground">
-                <img src="/images/court_6.png" class="game_court_image" alt="Badminton court image">
-            </div>
-        </div>
+    <!--코트 추가/삭제 버튼영역 -->
+    <div class="court-handle-button">
+        <button class="btn btn-primary" onclick="gameMatch.addCourt();">코트추가</button>
+        <button class="btn btn-danger" onclick="gameMatch.deleteCourt();">코트삭제</button>
     </div>
+    <!--코트 추가/삭제 버튼영역 end -->
+
+    <!--코트 영역 -->
+    <div class="container_gameMatch">
+
+    </div>
+    <!--코트 영역 end -->
 </body>
 </html>
