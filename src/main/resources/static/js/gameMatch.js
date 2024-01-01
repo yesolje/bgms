@@ -40,7 +40,7 @@ var gameMatch={
             pagination:false,
             //paginationSize:5,
             columns:[
-                {title:"코드", field:"memberCode",width:120},
+                {title:"코드", field:"memberCode",width:170},
                 {title:"이름",  field:"memberName"},
                 {title:"급수",   field:"gradeCode"},
                 {title:"성별", field:"sex" },

@@ -1,8 +1,26 @@
+@font-face {
+    font-family: "NanumGothic";
+    src: url("../fonts/NanumGothic.otf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "NanumGothicBold";
+    src: url("../fonts/NanumGothicBold.otf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "NanumGothicExtraBold";
+    src: url("../fonts/NanumGothicExtraBold.otf");
+    font-weight: normal;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* 홍준 추가 */
 }
 
 header {
@@ -14,7 +32,9 @@ header {
 
 .container_main {
    text-align: center;
-   margin-top: 50px;
+   padding-top: 50px;           /* 홍준 수정 : margin -> padding */
+   height: calc(100vh - 68px);  /* 홍준 추가 */
+   overflow-y: scroll;          /* 홍준 추가 */
 }
 
 img {
@@ -79,8 +99,9 @@ a:visited {
 }
 
 .btn{
-    margin: 5px 5px 3px 3px;
+    margin: 5px 5px 3px 0px;       /* 홍준 수정 : 왼쪽 마진 제거 */
     font-weight: bold;
+    font-size: 14px;    /* 홍준 추가 */
 }
 
 .container_court_playground {
@@ -125,5 +146,120 @@ a:visited {
 #playerTabulator {
         height: 300px; /* 테이블 창의 고정된 높이를 설정하세요 */
         /*overflow-y: scroll;수직 스크롤바 표시 */
-    }
+}
+
+/*2024-01-01 tabulator 건 추가 */
+/* scroll */
+::-webkit-scrollbar {
+    width: 8px;
+    margin: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(212, 212, 212);
+  }
+
+::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+    border-radius: 5px;
+}
+
+/* search */
+.search-container {
+    margin-top: 20px;
+}
+
+#searchArea {
+    padding: 5px 8px;
+    margin-right: 7px;
+    width: 240px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    outline: none;
+}
+
+#btnSearch {
+    background-color: #333;
+    color: #fff;
+}
+
+/* tabulator container */
+.tabulator-container {
+    width: 50vw;
+    min-width: 720px;
+    margin: 20px auto;
+}
+
+/* tabulator box */
+.tabulator {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tabulator .tabulator-tableholder {
+    overflow: hidden;   /* 스크롤 보이게 할 거면 overflow-y: scroll; */
+}
+
+.tabulator .tabulator-tableholder::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* tabulator header */
+.tabulator-header * {
+    background-color: #333 !important;
+    color: #fff;
+}
+
+.tabulator-col-content {
+    padding-left: 20px !important;
+    background-color: #333 !important;
+}
+
+/* tabulator cell */
+.tabulator-cell {
+    padding-left: 20px !important;
+    font-size: 17px;
+    line-height: 42px;
+}
+
+/* tabulator footer */
+.tabulator .tabulator-footer {
+    padding: 7px 0 10px 0;
+    background-color: #fff !important;
+    border-top: none !important;
+}
+
+.tabulator-paginator {
+    text-align: center !important;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+    background-color: #333;
+    border-color: #333;
+    color: #fff;
+}
+
+.tabulator .tabulator-footer .tabulator-page:not(.disabled):hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    color: #333;
+}
+
+/* modal */
+.modal-dialog {
+    max-width: 700px !important;
+}
+
+.modal-header {
+    padding: 20px;
+}
+
+.modal h1 {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.modal .tabulator .tabulator-tableholder {
+    overflow-y: scroll;
+}
 
