@@ -18,10 +18,13 @@ document.addEventListener("DOMContentLoaded", async function(){
 });
 
 var gameMatch={
+    //플레이어 리스트 가져오기
     viewPlayer: async function(){
         player = await gameMatch.getAllPlayer();
         console.log(player);
     },
+
+    //플레이어 리스트 가져오기 - 서버통신(비동기)
     getAllPlayer:function(){
         try{
             const response = fetch("/viewPlayer",{
@@ -33,6 +36,7 @@ var gameMatch={
             console.log("플레이어 가져오기 중 에러 발생",error);
         }
     },
+    //table 최초생성
     initTabulatorLoad:function(){
         table = new Tabulator("#playerTabulator", {
             data:player,
@@ -49,26 +53,22 @@ var gameMatch={
             ],
         });
     },
+
+    //신규 코트 추가
     addCourt:function(){
-       //코트추가 버튼을 눌러 코트를 추가한다.
-       //코트는 iframe 으로 이루어지며 id 값으로 고유 코트값을 갖는다.
         var courtId = gameMatch.generateRandomCourtId();
-        console.log(courtId);
-
-        var iframe = document.createElement('iframe');
-        iframe.src = '/iframe/court.html'; // 로드할 외부 HTML 파일의 경로로 수정
-        //iframe.frameBorder = '0'; // 외곽선 제거
-        // iframe을 추가할 영역 가져오기
+        var crt = gameMatch.COURT_FRAME_NEW(courtId);
         var container = document.querySelector('.container_gameMatch');
-
-        // iframe을 영역에 추가
-        container.appendChild(iframe);
-
-
+        container.innerHTML += crt;
     },
-    deleteCourt:function(){
 
+    //특정 코트 삭제
+    deleteCourt:function(courtId){
+         var element = document.getElementById(courtId);
+         element.parentNode.removeChild(element);
     },
+
+    //코트 아이디 생성(난수)
     generateRandomCourtId: function(){
       var characters ='1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       var result = '';
@@ -76,8 +76,94 @@ var gameMatch={
       for (let i = 0; i < 20; i++) {
           result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
-
       return result;
+    },
+
+    //게임 짜는 버튼 눌렀을 때 코트 내부를 다시 그려줌
+    makeGameAuto:function(type,courtId){
+        var matchCourt = gameMatch.COURT_FRAME_MATCH(courtId);
+        var unMatchCourt = document.getElementById(courtId);
+        unMatchCourt.outerHTML = matchCourt;
+
+    },
+
+    //코트 아이디로 코트를 찾아서 버튼영역과 코트 영역을 초기화 시켜줌
+    refreshCourt:function(courtId){
+        newCourtId = gameMatch.generateRandomCourtId();
+        var newCourt = gameMatch.COURT_FRAME_NEW(newCourtId);
+        var oldCourt = document.getElementById(courtId);
+        oldCourt.outerHTML = newCourt;
+    },
+
+    //게임시작 버튼을 누르면 플레이어 4명과 코트 번호를 서버로 전송, 버튼은 게임완료 버튼으로 바뀐다.
+    startGame:function(courtId){
+
+    },
+
+
+
+///////코트 프레임 모음 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //코트 프레임(초기화상태)
+    COURT_FRAME_NEW :function (courtId){
+        var crt = `
+                  <div class="container_court" id=${courtId}>
+                      <div class="container_court_button">
+                          <button class="btn btn-secondary" onclick="gameMatch.deleteCourt('${courtId}')"><img src="/images/trash.png" class="trash_image" alt="코트삭제"></button>
+                          <button class="btn btn-primary" onclick="gameMatch.makeGameAuto('male','${courtId}')">남복</button>
+                          <button class="btn btn-primary" onclick="gameMatch.makeGameAuto('female','${courtId}')">여복</button>
+                          <button class="btn btn-primary" onclick="gameMatch.makeGameAuto('mixed','${courtId}')">혼복</button>
+                          <button class="btn btn-primary" onclick="">수동</button>
+                      </div>
+                      <div class="container_court_playground">
+                          <img src="/images/court_6.png" class="game_court_image" alt="Badminton court image">
+                      </div>
+                  </div>
+                   `;
+        return crt;
+    },
+    //코트 프레임(진행중상태)
+    COURT_FRAME_MATCH :function (courtId){
+        var crt = `
+                <div class="container_court" id=${courtId}>
+                    <div class="container_court_button">
+                        <button class="btn btn-secondary" onclick="gameMatch.refreshCourt('${courtId}')">다시매칭</button>
+                        <button class="btn btn-primary" onclick="gameMatch.startGame('${courtId}')">게임시작</button>
+                    </div>
+                    <div class="container_court_playground">
+                        <table class="container_court_playGround_player">
+                          <tr>
+                              <td class="container_court_playGround_player_detail">
+                                  <div class="player">
+                                      <a>홍길동E1</a>
+                                  </div>
+                              </td>
+                              <td class="container_court_playGround_player_detail">
+                                  <div class="player">
+                                      <a>홍길동A</a>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="container_court_playGround_player_detail">
+                                  <div class="player">
+                                      <a>홍길동B</a>
+                                  </div>
+                              </td>
+                              <td class="container_court_playGround_player_detail">
+                                  <div class="player">
+                                      <a>홍길동E2</a>
+                                  </div>
+                              </td>
+                          </tr>
+                        </table>
+                        <img src="/images/court_6.png" class="game_court_image" alt="Badminton court image">
+                    </div>
+                </div>
+                `;
+        return crt;
     },
 
 }

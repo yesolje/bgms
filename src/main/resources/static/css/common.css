@@ -89,13 +89,16 @@ a:visited {
     display: inline-block;
 }
 .container_court > * {
-    width: 100%;
+    /*width: 100%;*/
     height: 100%;
 }
 .container_court_button{
     display: flex;
     justify-content: center;
-    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
 }
 .game_court_image{
     max-width: 300px;
