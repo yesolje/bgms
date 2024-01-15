@@ -73,4 +73,12 @@ public class GameController {
         return res;
     }
 
+    //게임중 등록
+    @RequestMapping(value = "/registerGame", produces ="application/json")
+    public ResponseEntity<?> matchAndRegisterGame(@RequestBody Object filter) {
+        String strResult = "";
+
+        ResponseEntity res = new ResponseEntity<>(strResult, HttpStatus.OK);
+        return null;
+    }
 }

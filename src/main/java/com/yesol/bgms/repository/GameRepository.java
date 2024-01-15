@@ -1,5 +1,6 @@
 package com.yesol.bgms.repository;
 
+import com.yesol.bgms.dto.MemberWithPlayAndGradeInfoDTO;
 import com.yesol.bgms.dto.MemberWithPlayInfoDTO;
 import com.yesol.bgms.vo.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,9 +13,12 @@ import java.util.List;
 
 public interface GameRepository extends JpaRepository<Game,Long> {
 
-    @Query("SELECT NEW com.yesol.bgms.dto.MemberWithPlayInfoDTO(g.memberCode, g.memberName, m.gradeCode, m.regDate, m.sex, m.adminYn, g.playCount) " +
-            "FROM Game g LEFT JOIN Member m ON g.memberCode = m.memberCode")
-    List<MemberWithPlayInfoDTO> selectAllPlayer();
+    @Query("SELECT NEW com.yesol.bgms.dto.MemberWithPlayAndGradeInfoDTO(" +
+            "g.memberCode, g.memberName, m.gradeCode, m.regDate, m.sex, m.adminYn, g.playCount, gr.gradeScore, gr.gradeName) " +
+            "FROM com.yesol.bgms.vo.Game g " +
+            "LEFT JOIN com.yesol.bgms.vo.Member m ON g.memberCode = m.memberCode " +
+            "LEFT JOIN com.yesol.bgms.vo.Grade gr ON m.gradeCode = gr.gradeCode")
+    List<MemberWithPlayAndGradeInfoDTO> selectAllPlayer();
 
     @Transactional
     @Modifying(clearAutomatically = true)

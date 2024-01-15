@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class MemberWithPlayInfoDTO {
+public class MemberWithPlayAndGradeInfoDTO {
 
     private String memberCode;
     private String memberName;
@@ -15,12 +15,16 @@ public class MemberWithPlayInfoDTO {
     private Date regDate;
     private String sex;
     private String adminYn;
-    private Integer playCount;
+    private int playCount;
 
-    public MemberWithPlayInfoDTO() {
+    private int gradeScore;
+
+    private String gradeName;
+
+    public MemberWithPlayAndGradeInfoDTO() {
     }
 
-    public MemberWithPlayInfoDTO(String memberCode, String memberName, String gradeCode, Date regDate, String sex, String adminYn, Integer playCount ) {
+    public MemberWithPlayAndGradeInfoDTO(String memberCode, String memberName, String gradeCode, Date regDate, String sex, String adminYn, int playCount , int gradeScore, String gradeName) {
         this.memberCode = memberCode;
         this.memberName = memberName;
         this.gradeCode = gradeCode;
@@ -28,7 +32,8 @@ public class MemberWithPlayInfoDTO {
         this.sex = sex;
         this.adminYn = adminYn;
         this.playCount = playCount;
-
+        this.gradeScore = gradeScore;
+        this.gradeName = gradeName;
 
     }
 

@@ -1,7 +1,9 @@
 package com.yesol.bgms.service;
 
+import com.yesol.bgms.dto.MemberWithPlayAndGradeInfoDTO;
 import com.yesol.bgms.dto.MemberWithPlayInfoDTO;
 import com.yesol.bgms.repository.GameRepository;
+import com.yesol.bgms.repository.MemberRepository;
 import com.yesol.bgms.vo.Member;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -18,10 +20,9 @@ public class GameService {
     private static final Logger logger = LoggerFactory.getLogger(GameRepository.class);
 
     public List getAllPlayer() {
-        List<MemberWithPlayInfoDTO> list = new ArrayList();
+        List<MemberWithPlayAndGradeInfoDTO> list = new ArrayList();
         try {
             list = gameRepository.selectAllPlayer();
-
         } catch(Exception e){
             logger.error("GameService.getAllPlayer ERROR :{}",e);
         }
